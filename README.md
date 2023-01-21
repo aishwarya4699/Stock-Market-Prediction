@@ -5,7 +5,6 @@ Analysis and Prediction of stocks using Machine Learning
 ### Install dependencies
 ```bash
 $ cd <dir>
-$ gh repo clone sarthak7gupta/Stock-Prediction
 $ cd Stock-Prediction
 
 $ curl https://pyenv.run | bash

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Strategy Form</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        form input {
+            margin: 20px;
+            padding: 5px;
+        }
+        .flex {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex">
+        <h1>Get Trading Strategy</h1>
+    </div>
+
+    <hr>
+
+    <form action="{{url_for('strategy')}}">
+        <div>
+            <label for="stock">Choose your stock from the list:</label>
+            <input list="stocks" name="symbol" required="required">
+            <datalist id="stocks">
+                {% for symbol, stock in stocks.items() %}
+                <option value="{{symbol}}">{{stock}}</option>
+                {% endfor %}
+            </datalist>
+        </div>
+        <div>
+            <label for="model">Choose the model used for prediction:</label>
+            <input list="models" name="model" required="required">
+            <datalist id="models">
+                {% for  model in models %}
+                <option value="{{model}}">{{model}}</option>
+                {% endfor %}
+            </datalist>
+        </div>
+        <div>
+            <label for="initial_cash">Initial Cash (₹): </label>
+            <input type="number" step="100" name="initial_cash" required="required" min="0">
+        </div>
+        <div>
+            <label for="commission_percentage">Commission Percentage (%): </label>
+            <input type="number" name="commission_percentage" required="required" value="0">
+        </div>
+        <div>
+            <label for="short_sell">OK to Short Sell?: </label>
+            <input type="checkbox" name="short_sell" required="required" checked="true">
+        </div>
+        <div>
+            <label for="margin_percentage">Margin Percentage (%): </label>
+            <input type="number" step="5" name="margin_percentage" required="required" value="0">
+        </div>
+        <div>
+            <label for="investment_period">No. of days to invest (days): </label>
+            <input type="number" name="investment_period" required="required" value="100">
+        </div>
+        <div>
+            <input type="submit" value="Get trading strategy">
+        </div>
+    </form>
+    <div class="flex">
+        <a href="{{url_for('index')}}">Home</a>
+    </div>
+</body>
+
+</html>

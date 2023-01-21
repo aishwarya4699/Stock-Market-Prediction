@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Stock Predictions Form</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        form input {
+            margin: 20px;
+            padding: 5px;
+        }
+        .flex {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex">
+        <h1>Get Stock Predictions</h1>
+    </div>
+
+    <hr>
+
+    <form action="{{url_for('predictions')}}">
+        <div>
+            <label for="stock">Choose your stock from the list:</label>
+            <input list="stocks" name="symbol" required="required">
+            <datalist id="stocks">
+                {% for symbol, stock in stocks.items() %}
+                <option value="{{symbol}}">{{stock}}</option>
+                {% endfor %}
+            </datalist>
+        </div>
+        <div>
+            <label for="model">Choose the model used for prediction:</label>
+            <input list="models" name="model" required="required">
+            <datalist id="models">
+                {% for  model in models %}
+                <option value="{{model}}">{{model}}</option>
+                {% endfor %}
+            </datalist>
+        </div>
+        <div>
+            <label for="start_date">Select the starting date:</label>
+            <input type="date" name="start_date" required="required">
+        </div>
+        <div>
+            <label for="stock">Select the ending date:</label>
+            <input type="date" name="end_date" required="required">
+        </div>
+        <div>
+            <input type="submit" value="Get future predictions">
+        </div>
+    </form>
+    <div class="flex">
+        <a href="{{url_for('index')}}">Home</a>
+    </div>
+</body>
+
+</html>

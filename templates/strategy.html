@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{symbol}} Stock Predictions</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        .flex {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .flex-c {
+            flex-direction: column;
+        }
+        .flex > * {
+            padding: 10px;
+        }
+        .centre-text {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    {% if strategy %}
+    <h2 class="centre-text">{{symbol}}</h2>
+    <hr>
+    <div class="flex">
+        Chosen <strong>{{strategy['name'].upper()}}</strong> strategy
+    </div>
+    <div class="flex">
+        Estimated ₹<strong>{{strategy['pnl'] | round(2)}}</strong> (<strong>{{strategy['pnl_pct'] | round(2)}}</strong>%) profit from <strong>{{strategy['capital'] | round}}</strong> investment
+    </div>
+    <hr>
+    {% for trade in strategy['trades'] %}
+    <div class="flex">
+        <strong>{{trade['type'].upper()}}</strong> <strong>{{trade['size']}}</strong> shares at <strong>{{trade['price'] | round(4)}}</strong> on <strong>{{trade['date']}}</strong>
+    </div>
+    {% endfor %}
+    <hr>
+    <div class="flex">
+        <a href="{{url_for('strategy_form')}}">Go Back</a>
+    </div>
+    {% else %}
+    <div class="flex flex-c">
+        <div><h1>Error</h1></div>
+    </div>
+    {% endif %}
+</body>
+
+</html>

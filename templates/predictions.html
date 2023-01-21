@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{symbol}} Stock Predictions</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        .flex {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .flex-c {
+            flex-direction: column;
+        }
+        .flex-r {
+            display: flex;
+        }
+        .flex * {
+            padding: 10px;
+        }
+        .centre-text {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h2 class="centre-text">{{symbol}}</h2>
+    <div class="flex flex-c">
+        {% for date, price in predictions.items() %}
+        <div class="flex flex-r">
+            <div>{{date}}</div>
+            <div>{{price}}</div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="flex">
+        <a href="{{url_for('prediction_form')}}">Go Back</a>
+    </div>
+</body>
+
+</html>
